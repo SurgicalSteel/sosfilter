@@ -16,6 +16,17 @@ var startsWith = func(s string, subintf interface{}, previousValid bool) bool {
 	return strings.HasPrefix(s, sub)
 }
 
+var startsWithNoCase = func(s string, subintf interface{}, previousValid bool) bool {
+	if !previousValid {
+		return previousValid
+	}
+	sub := fmt.Sprintf("%v", subintf)
+	if len(s) < len(sub) {
+		return false
+	}
+	return strings.HasPrefix(strings.ToLower(s), strings.ToLower(sub))
+}
+
 var endsWith = func(s string, subintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
@@ -27,6 +38,17 @@ var endsWith = func(s string, subintf interface{}, previousValid bool) bool {
 	return strings.HasSuffix(s, sub)
 }
 
+var endsWithNoCase = func(s string, subintf interface{}, previousValid bool) bool {
+	if !previousValid {
+		return previousValid
+	}
+	sub := fmt.Sprintf("%v", subintf)
+	if len(s) < len(sub) {
+		return false
+	}
+	return strings.HasSuffix(strings.ToLower(s), strings.ToLower(sub))
+}
+
 var contains = func(s string, subintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
@@ -36,6 +58,17 @@ var contains = func(s string, subintf interface{}, previousValid bool) bool {
 		return false
 	}
 	return strings.Contains(s, sub)
+}
+
+var containsNoCase = func(s string, subintf interface{}, previousValid bool) bool {
+	if !previousValid {
+		return previousValid
+	}
+	sub := fmt.Sprintf("%v", subintf)
+	if len(s) < len(sub) {
+		return false
+	}
+	return strings.Contains(strings.ToLower(s), strings.ToLower(sub))
 }
 
 var hasLengthOf = func(s string, lengthintf interface{}, previousValid bool) bool {
