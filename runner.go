@@ -25,22 +25,26 @@ func (f *Filter) Run() ([]string, error) {
 		switch fr.FilterFunc {
 		case StartsWith:
 			filterFunctionMap[StartsWith] = startsWith
-		case StartsWithNoCase:
-			filterFunctionMap[StartsWithNoCase] = startsWithNoCase
+		case StartsWithIgnoreCase:
+			filterFunctionMap[StartsWithIgnoreCase] = startsWithIgnoreCase
 		case EndsWith:
 			filterFunctionMap[EndsWith] = endsWith
-		case EndsWithNoCase:
-			filterFunctionMap[EndsWithNoCase] = endsWithNoCase
+		case EndsWithIgnoreCase:
+			filterFunctionMap[EndsWithIgnoreCase] = endsWithIgnoreCase
 		case Contains:
 			filterFunctionMap[Contains] = contains
-		case ContainsNoCase:
-			filterFunctionMap[ContainsNoCase] = containsNoCase
+		case ContainsIgnoreCase:
+			filterFunctionMap[ContainsIgnoreCase] = containsIgnoreCase
 		case HasLengthOf:
 			filterFunctionMap[HasLengthOf] = hasLengthOf
-		case EqualCase:
-			filterFunctionMap[EqualCase] = equalCase
-		case EqualNoCase:
-			filterFunctionMap[EqualNoCase] = equalNoCase
+		case HasMinLengthOf:
+			filterFunctionMap[HasMinLengthOf] = hasMinLengthOf
+		case HasMaxLengthOf:
+			filterFunctionMap[HasMaxLengthOf] = hasMaxLengthOf
+		case EqualsCase:
+			filterFunctionMap[EqualsCase] = equalsCase
+		case EqualsIgnoreCase:
+			filterFunctionMap[EqualsIgnoreCase] = equalsIgnoreCase
 		default:
 			continue
 		}
@@ -83,11 +87,11 @@ func validateFilterRule(fr FilterRule) error {
 	}
 	paramType := reflect.TypeOf(fr.Param)
 	switch fr.FilterFunc {
-	case StartsWith, StartsWithNoCase, EndsWith, EndsWithNoCase, Contains, ContainsNoCase, EqualCase, EqualNoCase:
+	case StartsWith, StartsWithIgnoreCase, EndsWith, EndsWithIgnoreCase, Contains, ContainsIgnoreCase, EqualsCase, EqualsIgnoreCase:
 		if paramType.Kind() != reflect.String {
 			return errors.New("Invalid param type")
 		}
-	case HasLengthOf:
+	case HasLengthOf, HasMinLengthOf, HasMaxLengthOf:
 		if paramType.Kind() != reflect.Int {
 			return errors.New("Invalid param type")
 		}

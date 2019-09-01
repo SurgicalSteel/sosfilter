@@ -16,7 +16,7 @@ var startsWith = func(s string, subintf interface{}, previousValid bool) bool {
 	return strings.HasPrefix(s, sub)
 }
 
-var startsWithNoCase = func(s string, subintf interface{}, previousValid bool) bool {
+var startsWithIgnoreCase = func(s string, subintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
 	}
@@ -38,7 +38,7 @@ var endsWith = func(s string, subintf interface{}, previousValid bool) bool {
 	return strings.HasSuffix(s, sub)
 }
 
-var endsWithNoCase = func(s string, subintf interface{}, previousValid bool) bool {
+var endsWithIgnoreCase = func(s string, subintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
 	}
@@ -60,7 +60,7 @@ var contains = func(s string, subintf interface{}, previousValid bool) bool {
 	return strings.Contains(s, sub)
 }
 
-var containsNoCase = func(s string, subintf interface{}, previousValid bool) bool {
+var containsIgnoreCase = func(s string, subintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
 	}
@@ -82,7 +82,29 @@ var hasLengthOf = func(s string, lengthintf interface{}, previousValid bool) boo
 	return (len(s) == length)
 }
 
-var equalCase = func(s string, strintf interface{}, previousValid bool) bool {
+var hasMinLengthOf = func(s string, minLengthintf interface{}, previousValid bool) bool {
+	if !previousValid {
+		return previousValid
+	}
+	minLength, ok := minLengthintf.(int)
+	if !ok {
+		return false
+	}
+	return (len(s) >= minLength)
+}
+
+var hasMaxLengthOf = func(s string, maxLengthintf interface{}, previousValid bool) bool {
+	if !previousValid {
+		return previousValid
+	}
+	maxLength, ok := maxLengthintf.(int)
+	if !ok {
+		return false
+	}
+	return (len(s) <= maxLength)
+}
+
+var equalsCase = func(s string, strintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
 	}
@@ -90,7 +112,7 @@ var equalCase = func(s string, strintf interface{}, previousValid bool) bool {
 	return (s == str)
 }
 
-var equalNoCase = func(s string, strintf interface{}, previousValid bool) bool {
+var equalsIgnoreCase = func(s string, strintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
 	}
