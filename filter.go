@@ -104,7 +104,7 @@ var hasMaxLengthOf = func(s string, maxLengthintf interface{}, previousValid boo
 	return (len(s) <= maxLength)
 }
 
-var equalsCase = func(s string, strintf interface{}, previousValid bool) bool {
+var equals = func(s string, strintf interface{}, previousValid bool) bool {
 	if !previousValid {
 		return previousValid
 	}

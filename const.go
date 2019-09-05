@@ -22,8 +22,8 @@ const (
 	HasMinLengthOf
 	// HasMaxLengthOf is a filter func ID for checking a string has maximum length of n characters
 	HasMaxLengthOf
-	//EqualsCase is a filter func ID for checking a string is equal to another string with case-sensitive comparison
-	EqualsCase
+	//Equals is a filter func ID for checking a string is equal to another string with case-sensitive comparison
+	Equals
 	//EqualsIgnoreCase is a filter func ID for checking a string is equal to another string with ignoring case-sensitive comparison
 	EqualsIgnoreCase
 )

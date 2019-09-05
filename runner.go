@@ -41,8 +41,8 @@ func (f *Filter) Run() ([]string, error) {
 			filterFunctionMap[HasMinLengthOf] = hasMinLengthOf
 		case HasMaxLengthOf:
 			filterFunctionMap[HasMaxLengthOf] = hasMaxLengthOf
-		case EqualsCase:
-			filterFunctionMap[EqualsCase] = equalsCase
+		case Equals:
+			filterFunctionMap[Equals] = equals
 		case EqualsIgnoreCase:
 			filterFunctionMap[EqualsIgnoreCase] = equalsIgnoreCase
 		default:
@@ -87,7 +87,7 @@ func validateFilterRule(fr FilterRule) error {
 	}
 	paramType := reflect.TypeOf(fr.Param)
 	switch fr.FilterFunc {
-	case StartsWith, StartsWithIgnoreCase, EndsWith, EndsWithIgnoreCase, Contains, ContainsIgnoreCase, EqualsCase, EqualsIgnoreCase:
+	case StartsWith, StartsWithIgnoreCase, EndsWith, EndsWithIgnoreCase, Contains, ContainsIgnoreCase, Equals, EqualsIgnoreCase:
 		if paramType.Kind() != reflect.String {
 			return errors.New("Invalid param type")
 		}
